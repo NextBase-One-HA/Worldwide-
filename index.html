@@ -2,66 +2,53 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
-<title>NEXT BASE | GLB WORLDWIDE</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>NEXT BASE | GLB</title>
 <style>
-:root{ --gold:#d6b25e; --bg:#050505; --text:#f2f2f2; --muted:#9a9a9a; }
-*{box-sizing:border-box}
+:root{ --gold:#d6b25e; --bg:#050505; --text:#f2f2f2; }
 body{ margin:0; background:var(--bg); color:var(--text); font-family:serif; overflow-x:hidden; }
 
-/* 1. 動画レイヤー */
-#intro{ position:fixed; inset:0; background:#000; z-index:9999; display:flex; align-items:center; justify-content:center; transition: opacity 1s; }
+/* 動画イントロ */
+#intro{ position:fixed; inset:0; background:#000; z-index:9999; display:flex; align-items:center; justify-content:center; }
 #intro video{ max-width:100%; max-height:100%; object-fit:contain; }
-#skip{ position:absolute; right:20px; bottom:30px; border:1px solid var(--gold); color:var(--gold); background:rgba(0,0,0,0.5); padding:10px 20px; border-radius:999px; cursor:pointer; z-index:10000; }
 
-/* 2. メインコンテンツ（最初は隠す） */
-#main{ opacity:0; transition:opacity 1.5s; padding:40px 20px; text-align:center; }
-#main.show{ opacity:1; }
+/* メイン */
+#main{ opacity:0; transition:opacity 1.5s; padding:40px 20px; text-align:center; display:none; }
+#main.show{ opacity:1; display:block; }
 
-.glb-logo{ width:min(80vw, 400px); margin:40px auto; display:block; }
-.logic-gate{ max-width:700px; margin:40px auto; border:2px solid var(--gold); padding:30px; border-radius:15px; background:rgba(20,20,20,0.9); }
-textarea{ width:100%; height:120px; background:#000; color:#fff; border:1px solid #333; padding:15px; font-size:1.1rem; }
-.btn{ display:block; width:250px; margin:20px auto; padding:15px; background:var(--gold); color:#000; font-weight:800; text-decoration:none; border-radius:8px; border:none; cursor:pointer; }
+.glb-logo{ width:min(70vw, 350px); margin:60px auto; display:block; }
+.hero-text{ font-size:1.5rem; letter-spacing:0.2em; margin-bottom:40px; color:var(--gold); }
 
-/* 3. 4.99ドル固定枠 */
-.product-fixed{ max-width:500px; margin:60px auto; border:1px solid #444; padding:30px; border-radius:20px; position:relative; }
-.badge{ position:absolute; top:-15px; left:50%; transform:translateX(-50%); background:var(--gold); color:#000; padding:2px 15px; font-weight:700; font-size:12px; }
+/* アプリ起動ボタン（唯一の出口） */
+.launch-btn{ 
+    display:inline-block; padding:20px 60px; background:none; color:var(--gold); 
+    border:2px solid var(--gold); font-size:1.3rem; font-weight:bold; 
+    text-decoration:none; border-radius:50px; transition:0.3s;
+}
+.launch-btn:hover{ background:var(--gold); color:#000; }
 
-/* 4. 名刺 */
-.master-card{ width:100%; max-width:400px; margin:80px auto 20px; border:1px solid #333; display:block; }
+.master-card{ width:100%; max-width:380px; margin:100px auto 20px; border:1px solid #333; display:block; }
 </style>
 </head>
 <body>
 
 <div id="intro">
   <video id="introVideo" autoplay muted playsinline>
-    <source src="黒　シンプル　扉　動画.mp4" type="video/mp4">
+    <source src="door.mp4" type="video/mp4">
   </video>
-  <button id="skip">SKIP TO APPS</button>
 </div>
 
 <div id="main">
-  <img src="image_21.png" class="glb-logo" alt="GLB Logo">
+  <img src="glb-logo.png" class="glb-logo" alt="GLB">
+  
+  <div class="hero-text">GLOBAL LANGUAGE BREAKER</div>
+  
+  <p style="color:#888; margin-bottom:40px;">150万のロジックが、今動き出す。</p>
 
-  <div class="logic-gate">
-    <h2 style="color:var(--gold); letter-spacing:0.3em;">1,500,000 LOGIC GATE</h2>
-    <textarea placeholder="ここに魂の言葉を叩き込め。"></textarea>
-    <button class="btn" onclick="alert('150万ロジック接続中...')">砕く (BREAK)</button>
-  </div>
+  <a href="apps/glb/index.html" class="launch-btn">LAUNCH APP</a>
 
-  <div class="product-fixed">
-    <div class="badge">FLAGSHIP</div>
-    <h3 style="font-size:24px;">GLB WORLDWIDE 4.99</h3>
-    <p style="color:var(--muted);">三原式の「砕き」を世界中の現場へ。</p>
-    <a href="https://buy.stripe.com/fZuaEZ0oRgd25Vl96fasg00" class="btn">GET FULL ACCESS</a>
-  </div>
-
-  <div style="opacity:0.5; margin-top:40px;">
-    <p>-- 1.99 Ver. Coming Soon (B-Project) --</p>
-  </div>
-
-  <img src="image_22.png" class="master-card" alt="Master Card">
-  <p style="color:var(--muted); font-style:italic;">"For you, I will never give up."</p>
+  <img src="master-card.png" class="master-card" alt="NextBase Master Card">
+  <p style="color:#666; font-style:italic;">"For you, I will never give up."</p>
 </div>
 
 <script>
@@ -69,7 +56,7 @@ const video = document.getElementById('introVideo');
 const intro = document.getElementById('intro');
 const main = document.getElementById('main');
 
-function showMain() {
+function enterSite() {
   intro.style.opacity = '0';
   setTimeout(() => {
     intro.style.display = 'none';
@@ -77,10 +64,9 @@ function showMain() {
   }, 1000);
 }
 
-video.onended = showMain;
-document.getElementById('skip').onclick = showMain;
-// 保険：10秒経ったら強制表示
-setTimeout(showMain, 10000);
+video.onended = enterSite;
+// 保険（8秒で強制切り替え）
+setTimeout(enterSite, 8000);
 </script>
 
 </body>
