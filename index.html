@@ -1,33 +1,309 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>NEXT BASE | GLB</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
+<title>NEXT BASE | GLB WORLDWIDE</title>
+
 <style>
-:root{ --gold:#d6b25e; --bg:#050505; --text:#f2f2f2; }
-body{ margin:0; background:var(--bg); color:var(--text); font-family:serif; overflow-x:hidden; }
+:root{
+  --gold:#d6b25e;
+  --bg:#050505;
+  --panel:#0f0f0f;
+  --line:#222;
+  --text:#f2f2f2;
+  --muted:#9a9a9a;
+}
+
+*{box-sizing:border-box}
+html,body{
+  margin:0;
+  padding:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  min-height:100%;
+}
+
+body{
+  overflow-x:hidden;
+}
 
 /* イントロ動画 */
-#intro{ position:fixed; inset:0; background:#000; z-index:9999; display:flex; align-items:center; justify-content:center; }
-#intro video{ max-width:100%; max-height:100%; object-fit:contain; }
-
-/* メイン */
-#main{ opacity:0; transition:opacity 1.5s; padding:40px 20px; text-align:center; display:none; }
-#main.show{ opacity:1; display:block; }
-
-.glb-logo{ width:min(70vw, 350px); margin:60px auto; display:block; }
-.hero-text{ font-size:1.5rem; letter-spacing:0.2em; margin-bottom:40px; color:var(--gold); }
-
-/* アプリ起動ボタン（唯一の出口） */
-.launch-btn{ 
-    display:inline-block; padding:20px 60px; background:none; color:var(--gold); 
-    border:2px solid var(--gold); font-size:1.3rem; font-weight:bold; 
-    text-decoration:none; border-radius:50px; transition:0.3s;
+#intro{
+  position:fixed;
+  inset:0;
+  background:#000;
+  z-index:9999;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition: opacity 1s ease;
 }
-.launch-btn:hover{ background:var(--gold); color:#000; }
 
-.master-card{ width:100%; max-width:380px; margin:100px auto 20px; border:1px solid #333; display:block; }
+#intro video{
+  max-width:100%;
+  max-height:100%;
+  object-fit:contain;
+  background:#000;
+}
+#skip{
+  position:absolute;
+  right:16px;
+  bottom:20px;
+  border:1px solid rgba(214,178,94,.55);
+  color:var(--gold);
+  background:rgba(0,0,0,.45);
+  padding:10px 14px;
+  border-radius:999px;
+  font-size:12px;
+  letter-spacing:.12em;
+  cursor:pointer;
+  backdrop-filter:blur(6px);
+  z-index:10000;
+}
+
+#main{
+  opacity:0;
+  transform:translateY(10px);
+  transition:opacity .8s ease, transform .8s ease;
+  display:none; /* 最初は非表示 */
+}
+
+#main.show{
+  opacity:1;
+  transform:none;
+  display:block;
+}
+
+.container{
+  max-width:1080px;
+  margin:0 auto;
+  padding:28px 20px 56px;
+}
+
+.topbar{
+  text-align:center;
+  color:var(--gold);
+  letter-spacing:.38em;
+  font-weight:700;
+  font-size:13px;
+  padding:8px 0 36px;
+}
+
+.hero{
+  text-align:center;
+  padding:18px 0 34px;
+}
+
+.hero-logo{
+  width:min(86vw,480px);
+  aspect-ratio:1/1;
+  margin:0 auto 20px;
+  border-radius:28px;
+  object-fit:cover;
+  display:block;
+  box-shadow:0 0 50px rgba(214,178,94,.18);
+  border:1px solid rgba(214,178,94,.16);
+}
+
+.hero h1{
+  margin:0 0 14px;
+  font-size:clamp(30px,7vw,50px);
+  line-height:1.05;
+  font-weight:700;
+  letter-spacing:.01em;
+}
+
+.hero p{
+  margin:0 auto;
+  max-width:700px;
+  color:var(--muted);
+  font-size:clamp(14px,3.5vw,18px);
+  line-height:1.7;
+}
+
+/* アプリ紹介セクション調整（グリッド） */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  margin-top: 50px;
+}
+
+.product{
+  background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(255,255,255,.01));
+  border:1px solid var(--line);
+  border-radius:22px;
+  padding:28px;
+  box-shadow:0 24px 60px rgba(0,0,0,.28);
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.product:hover {
+  transform: translateY(-5px);
+  border-color: rgba(214,178,94,0.5);
+}
+
+.product.featured {
+  border: 2px solid var(--gold);
+  position: relative;
+}
+
+.featured-badge {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--gold);
+  color: #000;
+  padding: 2px 12px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.product .eyebrow{
+  color:var(--gold);
+  letter-spacing:.12em;
+  font-weight:700;
+  font-size:12px;
+  margin-bottom:10px;
+}
+
+.price{
+  font-size:clamp(40px,8vw,56px);
+  line-height:1;
+  font-weight:800;
+  margin:0 0 15px;
+}
+
+.price span {
+  font-size: 16px;
+  color: var(--muted);
+  font-weight: 400;
+}
+
+.desc{
+  color:var(--muted);
+  font-size:15px;
+  line-height:1.7;
+  margin-bottom:24px;
+  min-height: 80px; /* 高さを揃える */
+}
+
+.btn{
+  display:block;
+  width:100%;
+  text-align:center;
+  text-decoration:none;
+  border-radius:12px;
+  padding:16px 18px;
+  margin-top:12px;
+  font-weight:800;
+  letter-spacing:.04em;
+  transition:transform .15s ease, opacity .15s ease, background .15s ease;
+}
+
+.btn:hover{opacity:.92}
+.btn:active{transform:scale(.985)}
+
+.btn-basic{
+  background:var(--gold);
+  color:#000;
+}
+
+.btn-pro{
+  background:#171717;
+  color:var(--gold);
+  border:1px solid rgba(214,178,94,.55);
+}
+
+.btn-master{
+  background:#fff;
+  color:#000;
+}
+
+.btn-launch{
+  background:transparent;
+  color:#d8d8d8;
+  border:1px solid #353535;
+  margin-top: 20px;
+}
+
+.legal{
+  text-align:center;
+  margin-top:52px;
+  font-size:13px;
+  color:var(--muted);
+}
+
+.legal a{
+  color:var(--gold);
+  text-decoration:none;
+  margin:0 10px;
+}
+
+/* 言語選択UI */
+.lang-selector-top{
+  position:fixed;
+  top:20px;
+  right:20px;
+  z-index:1000;
+}
+
+.lang-selector-top select{
+  padding:10px 16px;
+  background:rgba(0,0,0,.6);
+  border:1px solid rgba(214,178,94,.4);
+  border-radius:8px;
+  color:var(--gold);
+  font-size:13px;
+  cursor:pointer;
+  backdrop-filter:blur(10px);
+  transition:all .3s;
+}
+
+.lang-selector-top select:hover{
+  background:rgba(0,0,0,.8);
+  border-color:var(--gold);
+}
+
+.lang-selector-top select:focus{
+  outline:none;
+  border-color:var(--gold);
+  box-shadow:0 0 0 2px rgba(214,178,94,.2);
+}
+
+/* 名刺セクション */
+.master-card-section {
+  text-align: center;
+  margin-top: 80px;
+  padding: 40px 20px;
+  border-top: 1px solid var(--line);
+}
+
+.master-card-img {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 12px;
+  border: 1px solid #333;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+@media (max-width:640px){
+  .container{padding:22px 16px 44px}
+  .product{padding:22px}
+  .lang-selector-top{
+    top:12px;
+    right:12px;
+  }
+  .lang-selector-top select{
+    padding:8px 12px;
+    font-size:12px;
+  }
+}
 </style>
 </head>
 <body>
@@ -36,36 +312,211 @@ body{ margin:0; background:var(--bg); color:var(--text); font-family:serif; over
   <video id="introVideo" autoplay muted playsinline>
     <source src="door.mp4" type="video/mp4">
   </video>
+  <button id="skip" type="button">SKIP</button>
 </div>
 
 <div id="main">
-  <img src="glb-logo.png" class="glb-logo" alt="GLB">
-  
-  <div class="hero-text">GLOBAL LANGUAGE BREAKER</div>
-  
-  <p style="color:#888; margin-bottom:40px;">150万のロジックが、今動き出す。</p>
+  <div class="lang-selector-top">
+    <select id="top-lang-select">
+      <option value="ja">日本語</option>
+      <option value="en">English</option>
+      <option value="zh">中文</option>
+      <option value="ko">한국어</option>
+      <option value="es">Español</option>
+      <option value="fr">Français</option>
+      <option value="de">Deutsch</option>
+      <option value="it">Italiano</option>
+      <option value="pt">Português</option>
+      <option value="ru">Русский</option>
+      <option value="ar">العربية</option>
+      <option value="hi">हिन्दी</option>
+      <option value="th">ไทย</option>
+      <option value="vi">Tiếng Việt</option>
+      <option value="id">Bahasa Indonesia</option>
+      <option value="tr">Türkçe</option>
+      <option value="pl">Polski</option>
+      <option value="nl">Nederlands</option>
+      <option value="sv">Svenska</option>
+      <option value="no">Norsk</option>
+      <option value="da">Dansk</option>
+      <option value="fi">Suomi</option>
+      <option value="el">Ελληνικά</option>
+      <option value="cs">Čeština</option>
+      <option value="hu">Magyar</option>
+      <option value="ro">Română</option>
+    </select>
+  </div>
 
-  <a href="https://nextbase-one-ha.github.io/apps/glb/index.html" class="launch-btn">LAUNCH APP</a>
+  <div class="container">
+    <div class="topbar" data-i18n="topbar">NEXT BASE</div>
 
-  <img src="master-card.jpg" class="master-card" alt="NextBase Master Card">
-  <p style="color:#666; font-style:italic;">"For you, I will never give up."</p>
+    <section class="hero">
+      <img class="hero-logo" src="glb-logo.png.jpg" alt="GLB Logo">
+
+      <h1 data-i18n="title">Global Language Breaker</h1>
+      <p data-i18n="subtitle">
+        150万のロジックが、言葉の壁を粉砕する。<br>
+        Fast, simple, and built for real situations.
+      </p>
+
+      <div class="products-grid">
+        
+        <div class="product">
+          <div class="eyebrow" data-i18n="glbLiteEyebrow">GLB LITE / 日常の「砕き」</div>
+          <div class="price">$1.99<span> /mo</span></div>
+          <div class="desc" data-i18n="glbLiteDesc">
+            基本的な翻訳機能を提供。<br>
+            日常会話や簡単な意思疎通に。
+          </div>
+          <a class="btn btn-pro" href="https://buy.stripe.com/dRm3cx7Rj8KA0B1gyHasg01" data-i18n="getLite">GET LITE</a>
+        </div>
+
+        <div class="product featured">
+          <div class="featured-badge">MOST POPULAR</div>
+          <div class="eyebrow" data-i18n="glbProEyebrow">GLB PRO / 現場のプロ</div>
+          <div class="price">$4.99<span> /mo</span></div>
+          <div class="desc" data-i18n="glbProDesc">
+            三原式150万ロジックの実戦配備。<br>
+            旅行、ビジネス、あらゆる現場で戦うための「砕き」。
+          </div>
+          <a class="btn btn-basic" href="https://buy.stripe.com/fZuaEZ0oRgd25Vl96fasg00" data-i18n="getPro">GET PRO</a>
+        </div>
+
+        <div class="product">
+          <div class="eyebrow" data-i18n="glbMasterEyebrow">GLB MASTER / 全知能解放</div>
+          <div class="price">$7.99<span> /mo</span></div>
+          <div class="desc" data-i18n="glbMasterDesc">
+            最優先処理と全知能を解放。<br>
+            150万ロジックを極める、あんたの相棒。
+          </div>
+          <a class="btn btn-master" href="https://buy.stripe.com/cNi8wR8Vn8KA4Rh82basg02" data-i18n="getMaster">GET MASTER</a>
+        </div>
+        
+      </div>
+
+      <a class="btn btn-launch" href="apps/glb/index.html" data-i18n="launchApp">LAUNCH APP (Try 4.99 Ver.)</a>
+
+    </section>
+
+    <div class="master-card-section">
+      <img src="master-card.jpg" class="master-card-img" alt="Master Card">
+      <p style="color:var(--muted); font-style:italic; margin-top:15px;">"For you, I will never give up."</p>
+    </div>
+
+    <div class="legal">
+      <a href="legal.html" data-i18n="legal">Legal</a>
+      <a href="terms.html" data-i18n="terms">Terms</a>
+      <a href="privacy.html" data-i18n="privacy">Privacy</a>
+      <a href="support.html" data-i18n="support">Support</a>
+      <div style="margin-top:14px;">© 2026 NEXT BASE</div>
+    </div>
+  </div>
 </div>
 
 <script>
-const video = document.getElementById('introVideo');
+// --- 親方の執念（イントロ＆言語設定）はここから ---
 const intro = document.getElementById('intro');
+const introVideo = document.getElementById('introVideo');
 const main = document.getElementById('main');
+const skip = document.getElementById('skip');
 
-function enterSite() {
-  intro.style.opacity = '0';
+function enterSite(){
+  if (intro.classList.contains('hidden')) return;
+  intro.style.opacity = '0'; // フェードアウト演出追加
+  main.classList.add('show');
   setTimeout(() => {
     intro.style.display = 'none';
-    main.classList.add('show');
   }, 1000);
 }
 
-video.onended = enterSite;
-setTimeout(enterSite, 8000); // 8秒で強制切り替え
+skip.addEventListener('click', enterSite);
+introVideo.addEventListener('ended', enterSite);
+
+// 保険：12秒で自動終了（動画に合わせて少し延長）
+setTimeout(enterSite, 12000);
+
+introVideo.play().catch(() => {
+  // オートプレイ失敗時の保険
+  setTimeout(enterSite, 1200);
+});
+
+// 多言語対応テキスト（三段構えに合わせて修正）
+const topLangTexts = {
+  ja: {
+    topbar: "NEXT BASE",
+    title: "Global Language Breaker",
+    subtitle: "150万のロジックが、言葉の壁を粉砕する。<br>速く、シンプルに、実用的に。",
+    glbLiteEyebrow: "GLB LITE / 日常の「砕き」",
+    glbLiteDesc: "基本的な翻訳機能を提供。<br>日常会話や簡単な意思疎通に。",
+    getLite: "LITEを取得",
+    glbProEyebrow: "GLB PRO / 現場のプロ",
+    glbProDesc: "三原式150万ロジックの実戦配備。<br>旅行、ビジネス、あらゆる現場で戦うための「砕き」。",
+    getPro: "PROを取得",
+    glbMasterEyebrow: "GLB MASTER / 全知能解放",
+    glbMasterDesc: "最優先処理と全知能を解放。<br>150万ロジックを極める、あんたの相棒。",
+    getMaster: "MASTERを取得",
+    launchApp: "アプリを起動 (4.99版を試す)",
+    legal: "法的表示",
+    terms: "利用規約",
+    privacy: "プライバシー",
+    support: "サポート"
+  },
+  en: {
+    topbar: "NEXT BASE",
+    title: "Global Language Breaker",
+    subtitle: "150 million logics crush the language barrier.<br>Fast, simple, and built for real situations.",
+    glbLiteEyebrow: "GLB LITE / Daily Break",
+    glbLiteDesc: "Provides basic translation.<br>For daily conversations and simple communication.",
+    getLite: "GET LITE",
+    glbProEyebrow: "GLB PRO / Pro on Site",
+    glbProDesc: "Deployment of Mihara-style 1.5M logics.<br>The ultimate 'break' for travel, business, and any real situation.",
+    getPro: "GET PRO",
+    glbMasterEyebrow: "GLB MASTER / Full Intelligence",
+    glbMasterDesc: "Unleash priority processing and full intelligence.<br>The ultimate partner to master 1.5M logics.",
+    getMaster: "GET MASTER",
+    launchApp: "LAUNCH APP (Try 4.99 Ver.)",
+    legal: "Legal",
+    terms: "Terms",
+    privacy: "Privacy",
+    support: "Support"
+  }
+  // 他の言語は英語をフォールバック
+};
+
+const topLangSelect = document.getElementById('top-lang-select');
+
+function updateTopPageLanguage(lang) {
+  const texts = topLangTexts[lang] || topLangTexts.en;
+  const elements = document.querySelectorAll('[data-i18n]');
+  
+  elements.forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (texts[key]) {
+      if (el.tagName === 'A' || el.tagName === 'BUTTON') {
+        el.textContent = texts[key];
+      } else {
+        el.innerHTML = texts[key];
+      }
+    }
+  });
+  
+  localStorage.setItem('nextbase_top_lang', lang);
+}
+
+// 初期言語設定
+const savedTopLang = localStorage.getItem('nextbase_top_lang');
+const browserLang = (navigator.language || navigator.userLanguage).split('-')[0];
+const initialLang = savedTopLang || (topLangTexts[browserLang] ? browserLang : 'en');
+
+if (topLangSelect) {
+  topLangSelect.value = initialLang;
+  updateTopPageLanguage(initialLang);
+  
+  topLangSelect.addEventListener('change', (e) => {
+    updateTopPageLanguage(e.target.value);
+  });
+}
+// --- 親方の執念（言語設定）はここまで ---
 </script>
 
 </body>
