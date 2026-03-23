@@ -1,74 +1,29 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>NEXT BASE | ARCHITECTURE</title>
-    <style>
-        :root{ --gold:#d6b25e; --bg:#050505; --panel:#111; --line:#222; --blue:#1a73e8; }
-        body { background: var(--bg); color: #eee; font-family: "Helvetica Neue", Arial, sans-serif; margin: 0; padding: 60px 20px; display: flex; flex-direction: column; align-items: center; }
-        .container { width: 100%; max-width: 600px; }
-        header { text-align: center; margin-bottom: 60px; }
-        h1 { color: var(--gold); letter-spacing: 0.5em; font-weight: 100; font-size: 24px; }
-        
-        /* 共通インフラ表示 */
-        .infra-status { border-left: 2px solid var(--blue); padding-left: 15px; margin-bottom: 40px; font-size: 11px; letter-spacing: 1px; color: var(--blue); }
-
-        /* プロダクト・グリッド */
-        .product { background: var(--panel); border: 1px solid var(--line); padding: 30px; margin-bottom: 20px; position: relative; overflow: hidden; }
-        .product:hover { border-color: var(--gold); }
-        .product-code { font-size: 10px; color: var(--gold); opacity: 0.6; margin-bottom: 10px; }
-        .product-name { font-size: 20px; font-weight: 600; margin-bottom: 10px; color: #fff; }
-        .product-desc { font-size: 13px; color: #999; line-height: 1.6; margin-bottom: 20px; }
-        .tag-row { display: flex; gap: 8px; margin-bottom: 20px; }
-        .tag { font-size: 9px; border: 1px solid #444; padding: 2px 8px; color: #888; }
-        
-        .action-link { color: var(--gold); text-decoration: none; font-size: 12px; letter-spacing: 1px; border-bottom: 1px solid var(--gold); padding-bottom: 2px; }
-        
-        .footer-nav { margin-top: 60px; display: grid; grid-template-columns: 1fr 1fr; gap: 15px; border-top: 1px solid var(--line); padding-top: 30px; }
-        .footer-nav a { color: #555; text-decoration: none; font-size: 11px; transition: 0.3s; }
-        .footer-nav a:hover { color: var(--gold); }
-    </style>
-</head>
-<body>
 <div class="container">
-    <header>
-        <h1>NEXT BASE</h1>
-        <p style="font-size: 10px; color: #444; letter-spacing: 4px;">INTELLIGENT EDGE INFRASTRUCTURE</p>
-    </header>
-
-    <div class="infra-status">
-        SYSTEM LAYER: NE-GATEWAY ACTIVE<br>
-        PROTOCOL: ZERO-LOGGING / EPHEMERAL PROCESSING
-    </div>
-
     <div class="product">
-        <div class="product-code">PRJ-01: LANGUAGE BREAKER</div>
+        <div class="product-code">NODE: BREAKER</div>
         <div class="product-name">GLB-WORLDWIDE</div>
-        <div class="tag-row"><span class="tag">REAL-TIME</span><span class="tag">EDGE-AI</span></div>
         <div class="product-desc">
-            言語という壁を、情報の鮮度を保ったまま物理的に破壊する。NEゲートウェイが通信の境界でGeminiを制御し、機密を保護したまま世界と同期させます。
+            境界を越える通信をリアルタイムにデコードし、再構築。機密を「意味」から分離し、安全に世界と同期します。
         </div>
-        <a href="https://nextbase-one-ha.github.io/apps/glb/index.html" class="action-link">DEPLOY NODE</a>
+        <a href="https://nextbase-one-ha.github.io/apps/glb/index.html" class="action-link">ACCESS NODE</a>
     </div>
 
-    <div class="product">
-        <div class="product-code">PRJ-02: DATA STRUCTURE</div>
-        <div class="product-name">NE-STELLAR LAYER</div>
-        <div class="tag-row"><span class="tag">KNOWLEDGE</span><span class="tag">SECURE-STORAGE</span></div>
+    <div class="product" style="border-left: 2px solid #1a73e8;">
+        <div class="product-code">INFRA: CONNECT</div>
+        <div class="product-name">NE-API GATEWAY</div>
+        <div class="tag-row"><span class="tag">B2B</span><span class="tag">SECURITY-TUNNEL</span></div>
         <div class="product-desc">
-            社内機密、個人情報、非構造化データ。全ての情報をレイヤー化して管理。AIはあなたのデータを学習せず、知能だけを提供します。
+            既存システムをNEゲートウェイに直結。AI利用におけるデータガバナンスを、開発コストゼロで実装。
         </div>
-        <a href="#" class="action-link" style="opacity: 0.5; pointer-events: none;">COMING SOON</a>
+        <a href="support.html" class="action-link">REQUEST ACCESS</a>
     </div>
 
-    <div class="footer-nav">
-        <a href="legal.html">特定商取引法に基づく表記</a>
-        <a href="terms.html">利用規約</a>
-        <a href="privacy.html">プライバシーポリシー</a>
-        <a href="support.html">テクニカルサポート</a>
+    <div class="card" style="margin-top:40px; border:none; background:transparent; padding:0;">
+        <h2 style="font-size:14px; letter-spacing:2px; opacity:0.6;">PHILOSOPHY</h2>
+        <p style="font-size:12px; color:#666; font-style:italic;">
+            "We do not watch your data. We only empower your communication."<br>
+            （私たちはデータを見ない。ただ、あなたの通信を強化するだけだ。）
+        </p>
     </div>
 
-    <p style="margin-top: 60px; text-align: center; font-size: 10px; color: #222;">© 2026 NEXT BASE-Japan. All Rights Reserved.</p>
-</div>
-</body>
-</html>
+    </div>
