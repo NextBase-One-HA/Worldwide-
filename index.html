@@ -1,29 +1,69 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>NEXT BASE | 人とAIが、安全に繋がる場所</title>
+    <style>
+        :root{ --gold:#d6b25e; --bg:#fdfdfd; --panel:#fff; --line:#e0e0e0; --text:#333; }
+        body { background: var(--bg); color: var(--text); font-family: "Helvetica Neue", Arial, sans-serif; margin: 0; padding: 40px 20px; display: flex; flex-direction: column; align-items: center; }
+        .container { width: 100%; max-width: 700px; }
+        header { text-align: center; margin-bottom: 60px; border-bottom: 1px solid var(--line); padding-bottom: 30px; }
+        h1 { color: #000; letter-spacing: 0.2em; font-weight: 300; font-size: 28px; }
+        
+        .mission { font-size: 14px; color: #666; text-align: center; margin-bottom: 50px; line-height: 1.8; }
+
+        /* プロダクト・グリッド（温かみのあるデザイン） */
+        .product { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 30px; margin-bottom: 30px; }
+        .product:hover { border-color: var(--gold); box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .product-name { font-size: 20px; font-weight: 500; margin-bottom: 15px; color: #000; }
+        .product-desc { font-size: 14px; color: #666; line-height: 1.7; margin-bottom: 25px; }
+        
+        .action-btn { display: inline-block; background: var(--gold); color: #fff; padding: 10px 25px; text-decoration: none; font-size: 13px; border-radius: 4px; transition: 0.3s; }
+        .action-btn:hover { opacity: 0.8; }
+
+        /* 代表メッセージ（寂しさを埋める） */
+        .ceo-message { border-top: 1px solid var(--line); margin-top: 60px; padding-top: 40px; text-align: center; }
+        .ceo-sign { font-family: serif; font-style: italic; font-size: 18px; color: #000; margin-top: 15px; }
+
+        .footer-nav { margin-top: 60px; display: grid; grid-template-columns: 1fr 1fr; gap: 15px; font-size: 12px; border-top: 1px solid var(--line); padding-top: 30px; }
+        .footer-nav a { color: #888; text-decoration: none; }
+    </style>
+</head>
+<body>
 <div class="container">
+    <header>
+        <h1>NEXT BASE</h1>
+        <p style="font-size: 12px; color: #888; letter-spacing: 2px;">SECURE AI & COMMUNICATION</p>
+    </header>
+
+    <div class="mission">
+        私たちは、最先端のAI技術を、誰もが「安全」に「自由」に使える社会を目指します。<br>
+        データはあなたのもの。その信念を貫き、情報の境界線を守り抜きます。
+    </div>
+
     <div class="product">
-        <div class="product-code">NODE: BREAKER</div>
         <div class="product-name">GLB-WORLDWIDE</div>
         <div class="product-desc">
-            境界を越える通信をリアルタイムにデコードし、再構築。機密を「意味」から分離し、安全に世界と同期します。
+            <strong>会議のリアルタイム翻訳 & 安全なAI要約</strong><br>
+            海外チームとの会議や交渉を、データの痕跡を残さずスムーズに。機密情報は守りながら、世界中の言語と同期します。
         </div>
-        <a href="https://nextbase-one-ha.github.io/apps/glb/index.html" class="action-link">ACCESS NODE</a>
+        <a href="https://nextbase-one-ha.github.io/apps/glb/index.html" class="action-btn">アプリを体験する</a>
     </div>
 
-    <div class="product" style="border-left: 2px solid #1a73e8;">
-        <div class="product-code">INFRA: CONNECT</div>
-        <div class="product-name">NE-API GATEWAY</div>
-        <div class="tag-row"><span class="tag">B2B</span><span class="tag">SECURITY-TUNNEL</span></div>
-        <div class="product-desc">
-            既存システムをNEゲートウェイに直結。AI利用におけるデータガバナンスを、開発コストゼロで実装。
-        </div>
-        <a href="support.html" class="action-link">REQUEST ACCESS</a>
+    <div class="ceo-message">
+        <p style="font-size:14px; color:#555;">「AIの力を、信頼できる道具として、あなたの組織へ。」</p>
+        <div class="ceo-sign">Nakamura Norimasa</div>
+        <p style="font-size: 11px; color:#888;">Representative Director, NEXT BASE-Japan</p>
     </div>
 
-    <div class="card" style="margin-top:40px; border:none; background:transparent; padding:0;">
-        <h2 style="font-size:14px; letter-spacing:2px; opacity:0.6;">PHILOSOPHY</h2>
-        <p style="font-size:12px; color:#666; font-style:italic;">
-            "We do not watch your data. We only empower your communication."<br>
-            （私たちはデータを見ない。ただ、あなたの通信を強化するだけだ。）
-        </p>
+    <div class="footer-nav">
+        <a href="legal.html">特定商取引法</a>
+        <a href="terms.html">利用規約</a>
+        <a href="privacy.html">プライバシーポリシー</a>
+        <a href="support.html">お問い合わせ</a>
     </div>
 
-    </div>
+    <p style="margin-top: 60px; text-align: center; font-size: 11px; color: #aaa;">© 2026 NEXT BASE-Japan</p>
+</div>
+</body>
+</html>
