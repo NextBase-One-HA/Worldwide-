@@ -4,30 +4,59 @@
     <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>NEXT BASE | HUB</title>
     <style>
-        body { background: #050505; color: #d6b25e; font-family: serif; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; text-align: center; }
-        .box { border: 1px solid #d6b25e; padding: 40px; width: 90%; max-width: 450px; position: relative; }
-        .nav { display: flex; flex-direction: column; gap: 15px; margin: 30px 0; }
-        a { color: #f2f2f2; text-decoration: none; border: 1px solid #222; padding: 12px; font-size: 13px; transition: 0.3s; letter-spacing: 0.1em; }
-        a:hover { border-color: #d6b25e; background: rgba(214,178,94,0.05); }
-        .legal { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 10px; margin-top: 30px; border-top: 1px solid #222; padding-top: 20px; }
-        .legal a { border: none; color: #666; padding: 5px; }
-        .secure-tag { font-size: 9px; letter-spacing: 2px; color: #444; margin-top: 40px; border: 1px solid #222; display: inline-block; padding: 4px 12px; }
+        :root{ --gold:#d6b25e; --bg:#050505; --panel:#121212; --line:#2a2a2a; }
+        body { background: var(--bg); color: var(--gold); font-family: serif; margin: 0; display: flex; flex-direction: column; align-items: center; min-height: 100vh; padding: 40px 20px; }
+        .box { width: 100%; max-width: 500px; text-align: center; }
+        h1 { letter-spacing:0.4em; font-weight: 200; margin-bottom: 40px; }
+        
+        /* アプリ宣伝カード */
+        .app-card { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 25px; margin-bottom: 20px; text-align: left; transition: 0.3s; }
+        .app-card:hover { border-color: var(--gold); background: rgba(214,178,94,0.05); }
+        .app-tag { font-size: 10px; letter-spacing: 2px; color: #888; text-transform: uppercase; margin-bottom: 8px; }
+        .app-title { font-size: 18px; color: #fff; margin-bottom: 12px; font-weight: 400; }
+        .app-desc { font-size: 13px; color: #bdbdbd; line-height: 1.6; margin-bottom: 20px; }
+        .btn { display: inline-block; border: 1px solid var(--gold); color: var(--gold); padding: 8px 20px; text-decoration: none; font-size: 12px; transition: 0.3s; }
+        .btn:hover { background: var(--gold); color: #000; }
+
+        /* 共通セキュリティ基盤 */
+        .secure-banner { border: 1px solid #1a73e8; background: rgba(26,115,232,0.05); padding: 15px; border-radius: 8px; font-size: 11px; margin: 40px 0; color: #1a73e8; letter-spacing: 1px; }
+        
+        .legal-nav { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 11px; border-top: 1px solid var(--line); padding-top: 30px; }
+        .legal-nav a { color: #666; text-decoration: none; padding: 5px; }
     </style>
 </head>
 <body>
 <div class="box">
-    <h1 style="letter-spacing:0.4em; font-weight: 200;">NEXT BASE</h1>
-    <div class="nav">
-        <a href="https://nextbase-one-ha.github.io/apps/glb/index.html">PROJECT: GLB-WORLDWIDE</a>
-        <a href="support.html">CONTACT & SUPPORT</a>
+    <h1>NEXT BASE</h1>
+
+    <div class="secure-banner">
+        CORE TECHNOLOGY: NE-GATEWAY SECURED<br>
+        <span style="font-size: 9px; opacity: 0.8;">全てのアプリは「データ非保持・非学習」の防壁内で動作します</span>
     </div>
-    <div class="legal">
-        <a href="legal.html">LEGAL NOTICE / 特定商取引法</a>
-        <a href="terms.html">TERMS / 利用規約</a>
-        <a href="privacy.html">PRIVACY / プライバシー</a>
-        <a href="support.html">SUPPORT / お問い合わせ</a>
+
+    <div class="app-card">
+        <div class="app-tag">Project: Global Breaker</div>
+        <div class="app-title">GLB-WORLDWIDE</div>
+        <div class="app-desc">
+            言語の壁を破壊する。NEゲートウェイ上でGeminiがリアルタイムに音声を解析し、機密情報を守りながら世界中の言語へ繋ぎます。
+        </div>
+        <a href="https://nextbase-one-ha.github.io/apps/glb/index.html" class="btn">LAUNCH APP</a>
     </div>
-    <div class="secure-tag">SECURED BY NE-GATEWAY : NO DATA LOGGED</div>
+
+    <div class="app-card" style="opacity: 0.6;">
+        <div class="app-tag">Coming Soon</div>
+        <div class="app-title">NEXT STELLAR-LAYER</div>
+        <div class="app-desc">次世代の多層構造データ管理。機密性を保ったままAIの力を最大限に引き出す、法人向けインフラ。</div>
+    </div>
+
+    <div class="legal-nav">
+        <a href="legal.html">特定商取引法</a>
+        <a href="terms.html">利用規約</a>
+        <a href="privacy.html">プライバシー</a>
+        <a href="support.html">サポート</a>
+    </div>
+    
+    <div style="margin-top: 50px; opacity: 0.3; font-size: 10px;">© NEXT BASE-Japan</div>
 </div>
 </body>
 </html>
