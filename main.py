@@ -1,86 +1,78 @@
 import os
-from flask import Flask, request, render_template_string
+import google.generativeai as genai
+from flask import Flask, request, render_template_string, jsonify
 
 app = Flask(__name__)
+
+# --- STELLAR LAYER: SECURITY CONFIG ---
+# NEゲートウェイ環境変数からAPIキーを取得（直書き厳禁）
+genai.configure(api_key=os.environ.get("GEMINI_API_KEY"))
+model = genai.GenerativeModel('gemini-1.5-flash')
+
+# 事務長の拘り：エフェメラル（揮発性）プロンプト
+# データを学習させず、その場限りの構造変換を行うための制約
+SYSTEM_INSTRUCTION = """
+Role: Stellar-Layer Language Breaker.
+Constraint: 
+1. Process input ephemerally. Do not retain context.
+2. Output must be a high-precision 'Pivot Translation' (JP <-> EN).
+3. Tone: Noir, Professional, Minimalist.
+4. Privacy: Remove any PII (Personally Identifiable Information) during processing.
+"""
 
 HTML_TEMPLATE = """
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Global Language Breaker</title>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
+    <title>GLB | NEXT BASE</title>
     <style>
-        :root { --main-blue: #1a73e8; --ceramic-white: #ffffff; --noir-text: #1c1c1e; }
-        body { margin: 0; padding: 0; background: var(--ceramic-white); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica; min-height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; -webkit-tap-highlight-color: transparent; }
-        .canvas { text-align: center; width: 100%; max-width: 400px; padding: 40px; box-sizing: border-box; }
-        
-        .title { font-weight: 200; font-size: 0.75em; letter-spacing: 0.6em; color: var(--main-blue); text-transform: uppercase; margin-bottom: 80px; animation: letterSpacing 2s ease-out; }
-        @keyframes letterSpacing { from { letter-spacing: 1.5em; opacity: 0; } to { letter-spacing: 0.6em; opacity: 1; } }
-        
-        .mic-sphere { width: 120px; height: 120px; border-radius: 60px; background: radial-gradient(circle at 30% 30%, #4facfe 0%, #00f2fe 100%); margin: 0 auto 50px; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 30px 60px rgba(79,172,254,0.3); border: none; outline: none; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-        .mic-sphere:active { transform: scale(0.92); filter: brightness(1.1); box-shadow: 0 10px 30px rgba(79,172,254,0.2); }
-        .recording { animation: pulse 1.5s infinite ease-in-out; background: #ff3b30 !important; }
-        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(255,59,48,0.4); } 70% { box-shadow: 0 0 0 30px rgba(255,59,48,0); } 100% { box-shadow: 0 0 0 0 rgba(255,59,48,0); } }
-
-        .output-area { min-height: 120px; font-weight: 300; font-size: 1.3em; color: var(--noir-text); line-height: 1.6; letter-spacing: 0.02em; transition: 0.3s; }
-        .translation { margin-top: 20px; color: var(--main-blue); font-weight: 500; font-size: 1.1em; opacity: 0; transform: translateY(10px); transition: 0.5s; }
-        .show { opacity: 1; transform: translateY(0); }
-
-        .footer { position: fixed; bottom: 50px; width: 100%; left: 0; font-size: 0.65em; letter-spacing: 3px; }
-        .footer a { color: #d1d1d6; text-decoration: none; font-weight: 600; }
+        :root { --gold: #d6b25e; --bg: #050505; --blue: #1a73e8; }
+        body { margin: 0; background: var(--bg); color: #fff; font-family: "Helvetica Neue", sans-serif; height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        .canvas { text-align: center; width: 90%; max-width: 400px; }
+        .status-tag { font-size: 9px; color: var(--blue); letter-spacing: 2px; margin-bottom: 40px; border: 1px solid var(--blue); padding: 4px 10px; display: inline-block; }
+        .mic-sphere { width: 100px; height: 100px; border-radius: 50%; background: radial-gradient(circle, #222, #000); border: 1px solid var(--gold); cursor: pointer; transition: 0.4s; position: relative; }
+        .mic-sphere.active { box-shadow: 0 0 30px var(--blue); border-color: var(--blue); transform: scale(1.1); }
+        .output { margin-top: 40px; min-height: 80px; }
+        .original { font-size: 14px; color: #666; margin-bottom: 10px; }
+        .translated { font-size: 20px; color: var(--gold); font-weight: 200; letter-spacing: 1px; }
+        .footer { position: fixed; bottom: 40px; font-size: 10px; color: #333; letter-spacing: 2px; }
     </style>
 </head>
 <body>
     <div class="canvas">
-        <div class="title">Global Language Breaker</div>
-        
+        <div class="status-tag">SECURED BY NE-GATEWAY : EPHEMERAL MODE</div>
         <button id="micBtn" class="mic-sphere">
-            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg>
         </button>
-
-        <div id="originalText" class="output-area">Break the Silence.</div>
-        <div id="translatedText" class="translation"></div>
-
-        <div class="footer">
-            <a href="https://buy.stripe.com/bJedRbefH5yogzZfuDasg09">RESERVE FULL ACCESS $2.99</a>
+        <div class="output">
+            <div id="original" class="original">...Ready to Break</div>
+            <div id="translated" class="translated"></div>
         </div>
+        <div class="footer">© NEXT BASE | PRJ-01</div>
     </div>
 
     <script>
-        const micBtn = document.getElementById('micBtn');
-        const original = document.getElementById('originalText');
-        const translated = document.getElementById('translatedText');
+        const btn = document.getElementById('micBtn');
+        const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+        recognition.lang = 'ja-JP';
 
-        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-        if (SpeechRecognition) {
-            const recognition = new SpeechRecognition();
-            recognition.lang = 'ja-JP';
+        btn.onclick = () => { recognition.start(); btn.classList.add('active'); };
 
-            micBtn.onclick = () => {
-                recognition.start();
-                micBtn.classList.add('recording');
-                original.innerText = "Listening...";
-                translated.classList.remove('show');
-            };
+        recognition.onresult = async (event) => {
+            btn.classList.remove('active');
+            const text = event.results[0][0].transcript;
+            document.getElementById('original').innerText = text;
 
-            recognition.onresult = (event) => {
-                const text = event.results[0][0].transcript;
-                original.innerText = text;
-                micBtn.classList.remove('recording');
-                
-                // --- ノワール・疑似翻訳エンジン起動 ---
-                setTimeout(() => {
-                    translated.innerText = "Breaking the language barrier...";
-                    translated.classList.add('show');
-                }, 800);
-            };
-
-            recognition.onerror = () => {
-                micBtn.classList.remove('recording');
-                original.innerText = "Try again, Master.";
-            };
-        }
+            // NEゲートウェイ・エンドポイントへポスト
+            const res = await fetch('/process', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({text: text})
+            });
+            const data = await res.json();
+            document.getElementById('translated').innerText = data.result;
+        };
     </script>
 </body>
 </html>
@@ -90,5 +82,22 @@ HTML_TEMPLATE = """
 def index():
     return render_template_string(HTML_TEMPLATE)
 
+@app.route("/process", methods=["POST"])
+def process():
+    # 事務長の鉄則：受け取った瞬間に処理し、ログには残さない
+    data = request.json
+    input_text = data.get("text", "")
+    
+    if not input_text:
+        return jsonify({"result": ""})
+
+    # ステラレイヤーによる言語突破ロジック
+    prompt = f"{SYSTEM_INSTRUCTION}\n\nInput: {input_text}\nOutput:"
+    response = model.generate_content(prompt)
+    
+    # 揮発性レスポンス：メモリから即座に返す
+    return jsonify({"result": response.text.strip()})
+
 if __name__ == "__main__":
-    app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))
+    port = int(os.environ.get("PORT", 8080))
+    app.run(debug=False, host="0.0.0.0", port=port)
