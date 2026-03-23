@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template_string
+from flask import Flask, request, render_template_string
 
 app = Flask(__name__)
 
@@ -8,53 +8,78 @@ HTML_TEMPLATE = """
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Global Language Breaker</title>
     <style>
-        body { margin: 0; background: #ffffff; font-family: "Helvetica Neue", Arial, sans-serif; min-height: 100vh; display: flex; align-items: center; justify-content: center; color: #1a1a1a; overflow: hidden; }
-        .canvas { text-align: center; width: 100%; max-width: 600px; padding: 20px; animation: fadeIn 2s ease; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        :root { --main-blue: #1a73e8; --ceramic-white: #ffffff; --noir-text: #1c1c1e; }
+        body { margin: 0; padding: 0; background: var(--ceramic-white); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica; min-height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; -webkit-tap-highlight-color: transparent; }
+        .canvas { text-align: center; width: 100%; max-width: 400px; padding: 40px; box-sizing: border-box; }
         
-        .title { font-weight: 100; font-size: 0.9em; letter-spacing: 0.5em; color: #1a73e8; text-transform: uppercase; margin-bottom: 60px; opacity: 0.8; }
+        .title { font-weight: 200; font-size: 0.75em; letter-spacing: 0.6em; color: var(--main-blue); text-transform: uppercase; margin-bottom: 80px; animation: letterSpacing 2s ease-out; }
+        @keyframes letterSpacing { from { letter-spacing: 1.5em; opacity: 0; } to { letter-spacing: 0.6em; opacity: 1; } }
         
-        .mic-sphere { width: 100px; height: 100px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, #4facfe 0%, #00f2fe 100%); margin: 0 auto 40px; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 20px 50px rgba(79,172,254,0.2); transition: 0.5s; border: none; outline: none; }
-        .mic-sphere:active { transform: scale(0.9); filter: brightness(1.1); }
-        
-        .input-placeholder { font-weight: 200; font-size: 1.2em; color: #ccc; letter-spacing: 1px; margin-bottom: 100px; min-height: 1.5em; }
-        
-        .footer-link { position: fixed; bottom: 40px; font-size: 0.7em; letter-spacing: 2px; }
-        .footer-link a { color: #eee; text-decoration: none; transition: 0.3s; }
-        .footer-link a:hover { color: #1a73e8; }
+        .mic-sphere { width: 120px; height: 120px; border-radius: 60px; background: radial-gradient(circle at 30% 30%, #4facfe 0%, #00f2fe 100%); margin: 0 auto 50px; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 30px 60px rgba(79,172,254,0.3); border: none; outline: none; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .mic-sphere:active { transform: scale(0.92); filter: brightness(1.1); box-shadow: 0 10px 30px rgba(79,172,254,0.2); }
+        .recording { animation: pulse 1.5s infinite ease-in-out; background: #ff3b30 !important; }
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(255,59,48,0.4); } 70% { box-shadow: 0 0 0 30px rgba(255,59,48,0); } 100% { box-shadow: 0 0 0 0 rgba(255,59,48,0); } }
+
+        .output-area { min-height: 120px; font-weight: 300; font-size: 1.3em; color: var(--noir-text); line-height: 1.6; letter-spacing: 0.02em; transition: 0.3s; }
+        .translation { margin-top: 20px; color: var(--main-blue); font-weight: 500; font-size: 1.1em; opacity: 0; transform: translateY(10px); transition: 0.5s; }
+        .show { opacity: 1; transform: translateY(0); }
+
+        .footer { position: fixed; bottom: 50px; width: 100%; left: 0; font-size: 0.65em; letter-spacing: 3px; }
+        .footer a { color: #d1d1d6; text-decoration: none; font-weight: 600; }
     </style>
 </head>
 <body>
     <div class="canvas">
         <div class="title">Global Language Breaker</div>
         
-        <button class="mic-sphere" onclick="startRecognition()">
-            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+        <button id="micBtn" class="mic-sphere">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
         </button>
 
-        <div id="output" class="input-placeholder">Tap to break the barrier</div>
+        <div id="originalText" class="output-area">Break the Silence.</div>
+        <div id="translatedText" class="translation"></div>
 
-        <div class="footer-link">
-            <a href="https://buy.stripe.com/bJedRbefH5yogzZfuDasg09">SUPPORT THE PROJECT $2.99</a>
+        <div class="footer">
+            <a href="https://buy.stripe.com/bJedRbefH5yogzZfuDasg09">RESERVE FULL ACCESS $2.99</a>
         </div>
     </div>
 
     <script>
-        function startRecognition() {
-            const output = document.getElementById('output');
-            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-            if (SpeechRecognition) {
-                const recognition = new SpeechRecognition();
-                recognition.lang = 'ja-JP';
-                recognition.onstart = () => { output.innerText = "Listening..."; output.style.color = "#1a73e8"; };
-                recognition.onresult = (event) => { output.innerText = event.results[0][0].transcript; };
+        const micBtn = document.getElementById('micBtn');
+        const original = document.getElementById('originalText');
+        const translated = document.getElementById('translatedText');
+
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        if (SpeechRecognition) {
+            const recognition = new SpeechRecognition();
+            recognition.lang = 'ja-JP';
+
+            micBtn.onclick = () => {
                 recognition.start();
-            } else {
-                alert("Speech recognition not supported in this browser.");
-            }
+                micBtn.classList.add('recording');
+                original.innerText = "Listening...";
+                translated.classList.remove('show');
+            };
+
+            recognition.onresult = (event) => {
+                const text = event.results[0][0].transcript;
+                original.innerText = text;
+                micBtn.classList.remove('recording');
+                
+                // --- ノワール・疑似翻訳エンジン起動 ---
+                setTimeout(() => {
+                    translated.innerText = "Breaking the language barrier...";
+                    translated.classList.add('show');
+                }, 800);
+            };
+
+            recognition.onerror = () => {
+                micBtn.classList.remove('recording');
+                original.innerText = "Try again, Master.";
+            };
         }
     </script>
 </body>
