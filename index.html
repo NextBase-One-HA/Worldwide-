@@ -1,69 +1,76 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="en">
 <head>
-    <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>NEXT BASE | 人とAIが、安全に繋がる場所</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smile / Friend</title>
     <style>
-        :root{ --gold:#d6b25e; --bg:#fdfdfd; --panel:#fff; --line:#e0e0e0; --text:#333; }
-        body { background: var(--bg); color: var(--text); font-family: "Helvetica Neue", Arial, sans-serif; margin: 0; padding: 40px 20px; display: flex; flex-direction: column; align-items: center; }
-        .container { width: 100%; max-width: 700px; }
-        header { text-align: center; margin-bottom: 60px; border-bottom: 1px solid var(--line); padding-bottom: 30px; }
-        h1 { color: #000; letter-spacing: 0.2em; font-weight: 300; font-size: 28px; }
+        :root { --neon-gold: #ffcc00; --gold-glow: rgba(255, 204, 0, 0.9); }
+        body { background: #000; color: #fff; font-family: sans-serif; margin: 0; display: flex; flex-direction: column; height: 100vh; }
         
-        .mission { font-size: 14px; color: #666; text-align: center; margin-bottom: 50px; line-height: 1.8; }
+        /* 審査用：黄金の「帰り道」案内板 */
+        .app-nav { 
+            background: #111; 
+            border-bottom: 2px solid var(--neon-gold); 
+            padding: 20px; 
+            text-align: center; 
+            box-shadow: 0 0 20px var(--gold-glow); 
+        }
+        .glow-text { 
+            color: var(--neon-gold); 
+            text-shadow: 0 0 10px var(--neon-gold); 
+            font-weight: bold; 
+            font-size: 1.3rem;
+            animation: pulse 2s infinite alternate;
+        }
+        @keyframes pulse { from { opacity: 0.8; } to { opacity: 1; } }
 
-        /* プロダクト・グリッド（温かみのあるデザイン） */
-        .product { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 30px; margin-bottom: 30px; }
-        .product:hover { border-color: var(--gold); box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-        .product-name { font-size: 20px; font-weight: 500; margin-bottom: 15px; color: #000; }
-        .product-desc { font-size: 14px; color: #666; line-height: 1.7; margin-bottom: 25px; }
+        .instruction {
+            margin-top: 15px;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+        .done-box {
+            display: inline-block;
+            border: 2px solid var(--neon-gold);
+            padding: 5px 15px;
+            border-radius: 6px;
+            margin: 0 5px;
+            font-weight: bold;
+        }
         
-        .action-btn { display: inline-block; background: var(--gold); color: #fff; padding: 10px 25px; text-decoration: none; font-size: 13px; border-radius: 4px; transition: 0.3s; }
-        .action-btn:hover { opacity: 0.8; }
-
-        /* 代表メッセージ（寂しさを埋める） */
-        .ceo-message { border-top: 1px solid var(--line); margin-top: 60px; padding-top: 40px; text-align: center; }
-        .ceo-sign { font-family: serif; font-style: italic; font-size: 18px; color: #000; margin-top: 15px; }
-
-        .footer-nav { margin-top: 60px; display: grid; grid-template-columns: 1fr 1fr; gap: 15px; font-size: 12px; border-top: 1px solid var(--line); padding-top: 30px; }
-        .footer-nav a { color: #888; text-decoration: none; }
+        .main-content { flex: 1; display: flex; align-items: center; justify-content: center; padding: 20px; text-align: center; }
+        .footer-nav { padding: 20px; border-top: 1px solid #333; text-align: center; font-size: 0.8rem; }
+        .footer-nav a { color: #888; text-decoration: none; margin: 0 10px; }
     </style>
 </head>
 <body>
-<div class="container">
-    <header>
-        <h1>NEXT BASE</h1>
-        <p style="font-size: 12px; color: #888; letter-spacing: 2px;">SECURE AI & COMMUNICATION</p>
-    </header>
 
-    <div class="mission">
-        私たちは、最先端のAI技術を、誰もが「安全」に「自由」に使える社会を目指します。<br>
-        データはあなたのもの。その信念を貫き、情報の境界線を守り抜きます。
-    </div>
-
-    <div class="product">
-        <div class="product-name">GLB-WORLDWIDE</div>
-        <div class="product-desc">
-            <strong>会議のリアルタイム翻訳 & 安全なAI要約</strong><br>
-            海外チームとの会議や交渉を、データの痕跡を残さずスムーズに。機密情報は守りながら、世界中の言語と同期します。
+    <div class="app-nav">
+        <div class="glow-text">Smile / Friend</div>
+        <div class="instruction">
+            To return to the app, please tap <br>
+            <span class="done-box" style="color:var(--neon-gold);">Done</span> or <span class="done-box" style="color:var(--neon-gold);">×</span> <br>
+            at the top left of this screen.
         </div>
-        <a href="https://nextbase-one-ha.github.io/apps/glb/index.html" class="action-btn">アプリを体験する</a>
+        <div style="color: #666; font-size: 0.8rem; margin-top: 10px;">
+            ( アプリに戻るには、左上の「完了」を押してください )
+        </div>
     </div>
 
-    <div class="ceo-message">
-        <p style="font-size:14px; color:#555;">「AIの力を、信頼できる道具として、あなたの組織へ。」</p>
-        <div class="ceo-sign">Nakamura Norimasa</div>
-        <p style="font-size: 11px; color:#888;">Representative Director, NEXT BASE-Japan</p>
+    <div class="main-content">
+        <div style="border: 1px solid #444; padding: 40px; border-radius: 15px;">
+            <h1 class="glow-text" style="font-size: 2rem;">SMILE / FRIEND</h1>
+            <p style="color: #aaa;">Input: Smile Base / Output: Friend Base</p>
+        </div>
     </div>
 
     <div class="footer-nav">
-        <a href="legal.html">特定商取引法</a>
-        <a href="terms.html">利用規約</a>
-        <a href="privacy.html">プライバシーポリシー</a>
-        <a href="support.html">お問い合わせ</a>
+        <a href="terms.html">Terms</a> | 
+        <a href="privacy.html">Privacy</a> | 
+        <a href="legal.html">Legal</a> | 
+        <a href="support.html">Support</a>
     </div>
 
-    <p style="margin-top: 60px; text-align: center; font-size: 11px; color: #aaa;">© 2026 NEXT BASE-Japan</p>
-</div>
 </body>
 </html>
