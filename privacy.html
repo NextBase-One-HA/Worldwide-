@@ -1,63 +1,76 @@
-<!doctype html>
-<html lang="ja">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Privacy & Security | NEXT BASE</title>
-<style>
-:root{--bg:#0b0b0b;--panel:#121212;--line:#2a2a2a;--gold:#d6b25e;--text:#eaeaea;--muted:#bdbdbd;--safe:#1a73e8;}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;line-height:1.75}
-a{color:var(--gold);text-decoration:none}
-.wrap{max-width:920px;margin:0 auto;padding:28px 16px 60px}
-header{border-bottom:1px solid var(--line);padding:10px 0 18px;margin-bottom:18px}
-.brand{color:var(--gold);font-weight:800;letter-spacing:.18em;font-size:18px}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px;margin:14px 0}
-.secure-card{border:1px solid var(--safe);background:rgba(26,115,232,0.03)}
-h1,h2{margin:0 0 10px 0;color:var(--gold)}
-h2.safe-title{color:var(--safe)}
-p,li{margin:0 0 10px 0;font-size:14px}
-.muted{color:var(--muted);font-size:12px}
-.nav{display:flex;gap:12px;flex-wrap:wrap;margin-top:10px;font-size:12px}
-footer{border-top:1px solid var(--line);margin-top:18px;padding-top:12px;color:var(--muted);font-size:12px}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - Smile / Friend</title>
+    <style>
+        :root { --neon-gold: #ffcc00; --gold-glow: rgba(255, 204, 0, 0.9); }
+        body { background: #000; color: #fff; font-family: sans-serif; margin: 0; line-height: 1.6; }
+        
+        /* 審査対策：黄金の「帰り道」ナビゲーション */
+        .app-nav { 
+            background: #111; 
+            border-bottom: 2px solid var(--neon-gold); 
+            padding: 15px; 
+            text-align: center; 
+            position: sticky; 
+            top: 0; 
+            z-index: 10000;
+            box-shadow: 0 0 15px var(--gold-glow); 
+        }
+        .glow-text { color: var(--neon-gold); text-shadow: 0 0 10px var(--neon-gold); font-weight: bold; }
+        
+        .container { padding: 30px; max-width: 800px; margin: auto; }
+        .policy-section { border: 1px solid #333; padding: 20px; border-radius: 8px; margin-bottom: 20px; background: #050505; }
+        h1, h2 { color: var(--neon-gold); text-shadow: 0 0 5px var(--neon-gold); }
+        .footer-nav { text-align: center; padding: 20px; font-size: 0.8rem; border-top: 1px solid #333; }
+        .footer-nav a { color: #888; text-decoration: none; margin: 0 10px; }
+    </style>
 </head>
 <body>
-<div class="wrap">
-<header>
-<div class="brand">NEXT BASE</div>
-<div class="sub">Privacy & Data Governance</div>
-<div class="nav"><a href="index.html">← Home</a><a href="terms.html">Terms</a><a href="support.html">Support</a><a href="legal.html">Legal</a></div>
-</header>
 
-<div class="card secure-card">
-  <h2 class="safe-title">Data Processing Architecture (Security First)</h2>
-  <p><strong>EN:</strong> AI processing within NEXT BASE is contained entirely within the NE-Gateway. All data input is processed ephemerally; permanent storage or reuse for third-party model training is strictly prohibited.</p>
-  <p><strong>JP:</strong> 本サービスにおけるAI処理は、NEゲートウェイ内で完結します。入力データは一時的なメモリ処理（エフェメラル）に限定され、外部への蓄積やAI学習への再利用は物理的に遮断されています。</p>
-  <div class="muted">Status: SECURED BY NE-GATEWAY / NO DATA LOGGED</div>
-</div>
+    <div class="app-nav">
+        <div class="glow-text" style="font-size: 1.1rem;">Privacy Policy</div>
+        <div style="font-size: 0.85rem; color: #ccc; margin-top: 5px;">
+            To return to the app, tap <span class="glow-text" style="border: 1px solid var(--neon-gold); padding: 2px 8px; border-radius: 4px;">Done</span> at the top left.
+        </div>
+    </div>
 
-<div class="card">
-<h2>1. Information We Collect</h2>
-<ul>
-<li><strong>Contact info:</strong> Email address for support.</li>
-<li><strong>Technical data:</strong> Browser type, logs, and device info.</li>
-<li><strong>Ephemeral Data:</strong> Voice/Text inputs (Processed in real-time and deleted immediately).</li>
-</ul>
-</div>
+    <div class="container">
+        <h1>Privacy Policy</h1>
+        <p>Last Updated: March 27, 2026</p>
 
-<div class="card">
-<h2>2. Data Usage & AI Policy</h2>
-<p>We use your information only to provide the service. We <strong>NEVER</strong> use your personal data or input content to train AI models.</p>
-<p class="muted">私たちはサービス提供のみにデータを使用します。入力内容をAIの学習に利用することは一切ありません。</p>
-</div>
+        <div class="policy-section">
+            <h2>1. Service Overview</h2>
+            <p>Our service, <strong>"Smile / Friend"</strong>, provides a secure data processing environment. We facilitate the secure transmission of data between "Smile Base" (Input) and "Friend Base" (Output).</p>
+        </div>
 
-<div class="card">
-<h2>3. Contact</h2>
-<p><a href="mailto:info@nextbase-japan.com">info@nextbase-japan.com</a></p>
-</div>
+        <div class="policy-section">
+            <h2>2. Data Processing and Security</h2>
+            <p><strong>Smile / Friend</strong> processes user-submitted text data only for the purpose of real-time transformation and analysis. </p>
+            <ul>
+                <li><strong>No Persistent Storage:</strong> Data is processed temporarily in volatile memory and is not stored on our servers after the session ends.</li>
+                <li><strong>No AI Training:</strong> We do not use user data to train, improve, or fine-tune our AI models.</li>
+                <li><strong>Encryption:</strong> All data in transit is protected via industry-standard SSL/TLS encryption.</li>
+            </ul>
+        </div>
 
-<footer>© NEXT BASE</footer>
-</div>
+        <div class="policy-section">
+            <h2>3. Information We Collect</h2>
+            <p>We do not collect personal identifiers or any sensitive data beyond what is necessary to perform the service requested by the user within the app.</p>
+        </div>
+
+        <div class="policy-section">
+            <h2>4. Contact</h2>
+            <p>If you have any questions regarding this policy, please contact: <br>
+            <strong>info@nextbase-japan.com</strong></p>
+        </div>
+    </div>
+
+    <div class="footer-nav">
+        <a href="index.html">Top</a> | <a href="terms.html">Terms</a> | <a href="support.html">Support</a>
+    </div>
+
 </body>
 </html>
