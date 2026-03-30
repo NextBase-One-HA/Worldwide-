@@ -3,70 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NextBase :: GLB</title>
+    <title>NextBase :: GLB Access</title>
     <style>
         :root { --neon-gold: #ffcc00; --gold-glow: rgba(255, 204, 0, 0.8); }
-        body { background: #000; color: #fff; font-family: sans-serif; margin: 0; display: flex; flex-direction: column; min-height: 100vh; overflow-x: hidden; }
+        body { background: #000; color: #fff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 0; display: flex; flex-direction: column; min-height: 100vh; overflow-x: hidden; }
         
-        /* 頂点：25ドルの実弾（白背景で視線を強制） */
-        .primary-target {
+        /* Global Header: The 25$ Bullet */
+        .gateway-header {
             background: #fff;
             color: #000;
             text-align: center;
-            padding: 50px 20px;
-            border-bottom: 5px solid var(--neon-gold);
-            box-shadow: 0 10px 30px var(--gold-glow);
+            padding: 60px 20px;
+            border-bottom: 6px solid var(--neon-gold);
+            box-shadow: 0 15px 40px var(--gold-glow);
         }
-        .main-title { font-size: 2.2rem; font-weight: 900; line-height: 1.1; margin-bottom: 10px; }
-        .sub-text { font-size: 1.1rem; font-weight: bold; margin-bottom: 25px; color: #333; }
-        .buy-btn {
+        .main-title { font-size: 2.5rem; font-weight: 900; letter-spacing: -1px; line-height: 1.1; margin-bottom: 15px; }
+        .sub-headline { font-size: 1.2rem; font-weight: 600; margin-bottom: 30px; color: #444; }
+        .cta-button {
             display: inline-block;
             background: #000;
             color: #fff;
-            padding: 20px 40px;
+            padding: 22px 50px;
             font-size: 1.8rem;
             font-weight: 900;
             text-decoration: none;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+            transition: all 0.2s ease;
         }
-        .buy-btn:active { transform: scale(0.98); }
+        .cta-button:active { transform: scale(0.97); background: #222; }
 
-        /* 中央：暗闇の核心（完全秘匿） */
-        .core-box { flex: 1; display: flex; align-items: center; justify-content: center; padding: 60px 20px; }
-        .glow-frame { border: 1px solid #333; padding: 40px; border-radius: 20px; text-align: center; background: rgba(10,10,10,0.5); }
-        .neon-txt { color: var(--neon-gold); text-shadow: 0 0 15px var(--neon-gold); font-size: 1.8rem; font-weight: 900; margin-bottom: 10px; }
+        /* The Core: Smile / Friend */
+        .core-section { flex: 1; display: flex; align-items: center; justify-content: center; padding: 60px 20px; }
+        .identity-frame { border: 1px solid #333; padding: 45px; border-radius: 25px; text-align: center; background: rgba(15,15,15,0.8); }
+        .neon-brand { color: var(--neon-gold); text-shadow: 0 0 20px var(--neon-gold); font-size: 2rem; font-weight: 900; margin-bottom: 12px; letter-spacing: 2px; }
+        .lock-status { color: #555; font-size: 0.8rem; letter-spacing: 3px; font-weight: bold; }
 
-        /* 底部：審査用＆リーガル */
-        .bottom-shelf { background: #080808; border-top: 1px solid #222; padding: 30px 20px; text-align: center; }
-        .reviewer-info { color: #888; font-size: 0.8rem; margin-bottom: 20px; line-height: 1.6; }
-        .done-label { border: 1px solid var(--neon-gold); padding: 2px 8px; border-radius: 4px; color: var(--neon-gold); }
-        .nav-links a { color: #555; text-decoration: none; margin: 0 10px; font-size: 0.8rem; }
+        /* Reviewer & Legal Footer */
+        .system-footer { background: #0a0a0a; border-top: 1px solid #222; padding: 40px 20px; text-align: center; }
+        .instruction-box { color: #777; font-size: 0.85rem; margin-bottom: 25px; line-height: 1.6; }
+        .ui-label { border: 1px solid var(--neon-gold); padding: 3px 10px; border-radius: 5px; color: var(--neon-gold); font-weight: bold; }
+        .legal-links a { color: #444; text-decoration: none; margin: 0 12px; font-size: 0.8rem; transition: color 0.2s; }
+        .legal-links a:hover { color: var(--neon-gold); }
     </style>
 </head>
 <body>
 
-    <div class="primary-target">
-        <div class="main-title">GLB WEB EDITION:<br>LIFETIME ACCESS</div>
-        <div class="sub-text">ヤフオク実績785件の男が贈る、<br>1名限定の永久ライセンス。</div>
-        <a href="https://buy.stripe.com/14A9AV8Vn8KA97xbenasg0l" class="buy-btn">GET ACCESS NOW ($25)</a>
-        <div style="font-size: 0.8rem; color: #888; margin-top: 15px;">※一回払い・Gemini 2.5 150%モード搭載</div>
+    <div class="gateway-header">
+        <div class="main-title">GLB WEB EDITION:<br>LIFETIME LICENSE</div>
+        <div class="sub-headline">Verified Creator. 15 Years of Proven Integrity.<br>One-time payment. No subscriptions.</div>
+        <a href="https://buy.stripe.com/14A9AV8Vn8KA97xbenasg0l" class="cta-button">UNLOCK NOW ($25)</a>
+        <div style="font-size: 0.8rem; color: #999; margin-top: 20px; letter-spacing: 1px;">POWERED BY GEMINI 2.5 FLASH (150% MODE)</div>
     </div>
 
-    <div class="core-box">
-        <div class="glow-frame">
-            <div class="neon-txt">SMILE / FRIEND</div>
-            <div style="color: #444; font-size: 0.9rem; letter-spacing: 2px;">AUTHENTICATED & LOCKED.</div>
+    <div class="core-section">
+        <div class="identity-frame">
+            <div class="neon-brand">SMILE / FRIEND</div>
+            <div class="lock-status">ENCRYPTED & PROTECTED</div>
         </div>
     </div>
 
-    <div class="bottom-shelf">
-        <div class="reviewer-info">
-            App Store Reviewer: Tap <span class="done-label">Done</span> or <span class="done-label">×</span> at the top left to return.<br>
-            ( アプリに戻るには、左上の「完了」を押してください )
+    <div class="system-footer">
+        <div class="instruction-box">
+            App Store Reviewer: Tap <span class="ui-label">Done</span> or <span class="ui-label">×</span> at the top left to return.<br>
+            <span style="font-size: 0.75rem;">( アプリに戻るには、左上の「完了」を押してください )</span>
         </div>
-        <div class="nav-links">
-            <a href="terms.html">Terms</a> | <a href="privacy.html">Privacy</a> | <a href="legal.html">Legal</a> | <a href="support.html">Support</a>
+        <div class="legal-links">
+            <a href="terms.html">Terms</a> | <a href="privacy.html">Privacy</a> | <a href="legal.html">Legal Notice</a> | <a href="support.html">Support</a>
         </div>
     </div>
 
