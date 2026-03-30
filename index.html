@@ -3,74 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smile / Friend</title>
+    <title>NextBase :: GLB Web Edition</title>
     <style>
         :root { --neon-gold: #ffcc00; --gold-glow: rgba(255, 204, 0, 0.9); }
-        body { background: #000; color: #fff; font-family: sans-serif; margin: 0; display: flex; flex-direction: column; height: 100vh; }
+        body { background: #000; color: #fff; font-family: 'Inter', sans-serif; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
         
-        /* 審査用：黄金の「帰り道」案内板 */
-        .app-nav { 
-            background: #111; 
-            border-bottom: 2px solid var(--neon-gold); 
-            padding: 20px; 
-            text-align: center; 
-            box-shadow: 0 0 20px var(--gold-glow); 
+        /* 150系：売り切り実弾（物理最優先） */
+        .glb-release-banner {
+            text-align: center;
+            margin: 40px auto;
+            max-width: 800px;
+            padding: 40px;
+            border: 5px solid #000;
+            background: #fff; /* パパの熱量を際立たせる白ベース */
+            border-radius: 10px;
+            box-shadow: 0 0 30px var(--gold-glow);
         }
-        .glow-text { 
-            color: var(--neon-gold); 
-            text-shadow: 0 0 10px var(--neon-gold); 
-            font-weight: bold; 
-            font-size: 1.3rem;
-            animation: pulse 2s infinite alternate;
-        }
-        @keyframes pulse { from { opacity: 0.8; } to { opacity: 1; } }
-
-        .instruction {
-            margin-top: 15px;
-            font-size: 1rem;
-            line-height: 1.5;
-        }
-        .done-box {
+        .release-title { font-size: 28pt; font-weight: 900; color: #000; letter-spacing: -1px; margin: 0; }
+        .release-spec { font-size: 14pt; font-weight: 700; color: #333; margin: 15px 0; }
+        .buy-button {
             display: inline-block;
-            border: 2px solid var(--neon-gold);
-            padding: 5px 15px;
-            border-radius: 6px;
-            margin: 0 5px;
+            background: #000;
+            color: #fff;
+            padding: 25px 60px;
+            font-size: 22pt;
+            font-weight: 900;
+            text-decoration: none;
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            transition: transform 0.1s ease;
+        }
+        .buy-button:active { transform: translateY(3px); }
+        .release-note { margin-top: 20px; font-size: 10pt; color: #666; font-style: italic; }
+
+        /* 核心：光沢（NE Gateway Blackbox） */
+        .glow-text {
+            color: var(--neon-gold);
+            text-shadow: 0 0 10px var(--neon-gold);
             font-weight: bold;
+            font-size: 1.3rem;
         }
         
         .main-content { flex: 1; display: flex; align-items: center; justify-content: center; padding: 20px; text-align: center; }
-        .footer-nav { padding: 20px; border-top: 1px solid #333; text-align: center; font-size: 0.8rem; }
-        .footer-nav a { color: #888; text-decoration: none; margin: 0 10px; }
+        
+        /* 審査用：黄金の「帰り道」案内（最下部へ） */
+        .app-nav { 
+            background: #111; 
+            border-top: 2px solid var(--neon-gold); 
+            padding: 15px; 
+            text-align: center; 
+            box-shadow: 0 -10px 20px var(--gold-glow); 
+            font-size: 0.9rem;
+        }
+        .instruction { color: #888; margin-top: 5px; line-height: 1.4; }
+        
+        .footer-nav { padding: 20px; border-top: 1px solid #333; text-align: center; font-size: 0.8rem; background: #080808; }
+        .footer-nav a { color: #aaa; text-decoration: none; margin: 0 10px; }
     </style>
 </head>
 <body>
-　　<div style="text-align: center; margin: 40px 0; padding: 30px; border: 5px solid #000; background: #f0f0f0;">
-    <h2 style="font-family: 'Inter', sans-serif; font-weight: 900; color: #000;">GLB WEB EDITION: LIFETIME ACCESS</h2>
-    <p style="font-size: 14pt; font-weight: 700; color: #333;">ヤフオク実績785件の男が贈る、1名限定の永久ライセンス。</p>
-    <a href="https://buy.stripe.com/14A9AV8Vn8KA97xbenasg0l" 
-       style="display: inline-block; background: #000; color: #fff; padding: 25px 50px; font-size: 20pt; font-weight: 900; text-decoration: none; border-radius: 5px; box-shadow: 0 10px 20px rgba(0,0,0,0.3);">
-       GET ACCESS NOW ($25)
-    </a>
-    <p style="margin-top: 20px; font-size: 10pt; color: #666;">※月額課金なし。買い切り一回払い。</p>
-</div>
 
-    <div class="app-nav">
-        <div class="glow-text">Smile / Friend</div>
-        <div class="instruction">
-            To return to the app, please tap <br>
-            <span class="done-box" style="color:var(--neon-gold);">Done</span> or <span class="done-box" style="color:var(--neon-gold);">×</span> <br>
-            at the top left of this screen.
-        </div>
-        <div style="color: #666; font-size: 0.8rem; margin-top: 10px;">
-            ( アプリに戻るには、左上の「完了」を押してください )
-        </div>
+    <div class="glb-release-banner">
+        <h2 class="release-title">GLB WEB EDITION: LIFETIME ACCESS</h2>
+        <p class="release-spec">ヤフオク実績785件の男が贈る、1名限定の永久ライセンス。</p>
+        <a href="https://buy.stripe.com/14A9AV8Vn8KA97xbenasg0l" class="buy-button">
+            GET ACCESS NOW ($25)
+        </a>
+        <p class="release-note">※月額課金なし。買い切り一回払い。Gemini 2.5 150%モード搭載。</p>
     </div>
 
     <div class="main-content">
-        <div style="border: 1px solid #444; padding: 40px; border-radius: 15px;">
-            <h1 class="glow-text" style="font-size: 2rem;">SMILE / FRIEND</h1>
-            <p style="color: #aaa;">Input: Smile Base / Output: Friend Base</p>
+        <div style="padding: 20px;">
+            <h1 class="glow-text" style="font-size: 1.5rem;">SMILE / FRIEND</h1>
+            <p style="color: #666; font-size: 0.8rem;">Input: Smile Base / Output: Friend Base (ne gateway locked)</p>
+        </div>
+    </div>
+
+    <div class="app-nav">
+        <div class="glow-text" style="font-size: 1rem;">Smile / Friend</div>
+        <div class="instruction">
+            App Store Reviewer: Tap 'Done' at the top left to return.
+            <span style="color: #666;">( アプリに戻るには、左上の「完了」を押してください )</span>
         </div>
     </div>
 
